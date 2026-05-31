@@ -1,19 +1,29 @@
 <?php
 session_start();
-header('Content-Type: text/html; charset=utf-8');
 
 define('TO_EMAIL', 'sherwin1983@gmail.com');
 define('SITE_NAME', 'Microdot');
 define('RATE_LIMIT_SECONDS', 300);
 define('MAX_REQUESTS_PER_IP', 3);
 
+$is_ajax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+function json_response($code, $data) {
+    http_response_code($code);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    if ($is_ajax) json_response(405, ['ok' => false, 'error' => 'Method not allowed']);
     header('Location: /contact/', true, 303);
     exit;
 }
 
 $honeypot = trim($_POST['website'] ?? '');
 if ($honeypot !== '') {
+    if ($is_ajax) json_response(200, ['ok' => true]);
     http_response_code(200);
     exit('Thank you for your message.');
 }
@@ -93,6 +103,7 @@ if (empty($message) || strlen($message) < 10 || strlen($message) > 5000) {
 }
 
 if (!empty($errors)) {
+    if ($is_ajax) json_response(400, ['ok' => false, 'error' => implode(' ', $errors)]);
     http_response_code(400);
     echo '<h2>Form Error</h2><ul>';
     foreach ($errors as $e) {
@@ -126,6 +137,8 @@ $headers = str_replace(["\r\n", "\r", "\n"], '', $headers);
 $sent = mail(TO_EMAIL, $subject, $body, $headers);
 
 if ($sent) {
+    if ($is_ajax) json_response(200, ['ok' => true]);
+    header('Content-Type: text/html; charset=utf-8');
     ?>
     <!doctype html>
     <html lang="en">
@@ -154,6 +167,8 @@ if ($sent) {
     </html>
     <?php
 } else {
+    if ($is_ajax) json_response(500, ['ok' => false, 'error' => 'Server error. Please email sherwin1983@gmail.com directly.']);
     http_response_code(500);
+    header('Content-Type: text/html; charset=utf-8');
     echo '<h2>Server Error</h2><p>Unable to send your message. Please try again later or email us directly at sherwin1983@gmail.com.</p><p><a href="/contact/">Go back</a></p>';
 }

@@ -869,6 +869,27 @@ a.btn-whatsapp-anchor, a.btn-contact-anchor {
     justify-content: flex-start;
 }
 
+.form-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.form-message.success {
+    display: block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.form-message.error {
+    display: block;
+    background: #fbe9e7;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
 .consent-banner {
     position: fixed;
     bottom: 0;
