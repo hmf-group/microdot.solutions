@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build:css": "csso css/base.css --output css/base.min.css",
+    "build:js": "terser js/global.js --compress --mangle --output js/global.min.js",
+    "build": "npm run build:css && npm run build:js",
+    "serve": "node local-server.js"
+  },
+  "devDependencies": {
+    "csso": "^5.0.5",
+    "sharp": "^0.34.5",
+    "terser": "^5.48.0"
+  }
+}

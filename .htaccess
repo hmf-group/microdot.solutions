@@ -1,0 +1,72 @@
+ErrorDocument 404 /404/
+
+# =============================
+# Compression — gzip
+# =============================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# =============================
+# Compression — brotli (if available)
+# =============================
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# =============================
+# Security Headers
+# =============================
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' http://localhost:* http://127.0.0.1:* 'sha256-iN7wpJdxHlpujRppkOA8N0+Mzp0ZqZr3lCtxM00Y63c='; style-src 'self' http://localhost:* http://127.0.0.1:*; img-src 'self' http://localhost:* http://127.0.0.1:* data:; font-src 'self' http://localhost:* http://127.0.0.1:*; connect-src 'self' http://localhost:* http://127.0.0.1:*; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' http://localhost:* http://127.0.0.1:*; frame-ancestors 'none';"
+</IfModule>
+
+RewriteEngine On
+
+# =============================
+# SSL & Canonical Redirects
+# =============================
+
+# Redirect www to non-www (apex domain)
+RewriteCond %{HTTP_HOST} ^www\.microdot\.solutions [NC]
+RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
+
+
+# =============================
+# URL Routing
+# =============================
+
+# Geo-location URLs (2-letter country / province / city) → index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^[a-z]{2}/[^/]+/?$ /index.html [L]
+
+# Static assets under geo paths → serve from root (safety net for direct requests)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^[a-z]{2}/[^/]+/(.+)$ /$1 [L]
+
+# Page routes (1 segment with trailing slash) → page.html
+# e.g. /services/ → services.html, /contact/ → contact.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/$ $1.html [L]
+
+# Fallback for everything else — serve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+<FilesMatch "\.(html|htm|js|css|jpg|jpeg|png|gif)$">
+    FileETag None
+    <IfModule mod_headers.c>
+        Header unset ETag
+        Header set Cache-Control "max-age=0, no-cache, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+    </IfModule>
+</FilesMatch>
