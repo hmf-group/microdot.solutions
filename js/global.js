@@ -278,6 +278,46 @@
         );
       }
 
+      // JSON-LD for Googlebot (dynamic, so actual values are seen)
+      var ldEl = document.getElementById('geo-ld');
+      if (!ldEl) {
+        ldEl = document.createElement('script');
+        ldEl.id = 'geo-ld';
+        ldEl.type = 'application/ld+json';
+        document.head.appendChild(ldEl);
+      }
+      ldEl.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': 'Microdot',
+        'url': window.location.origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city) + '/',
+        'description': 'Max performance web development in ' + loc.city + ', ' + loc.country,
+        'areaServed': {
+          '@type': 'City',
+          'name': loc.city,
+          'containedInPlace': {
+            '@type': 'State',
+            'name': loc.state_province
+          }
+        },
+        'provider': {
+          '@type': 'LocalBusiness',
+          'name': 'Microdot ' + loc.country_code,
+          'image': 'https://microdot.solutions/assets/images/microdot.svg',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': loc.street_address || '',
+            'addressLocality': loc.city,
+            'addressRegion': loc.state_province,
+            'postalCode': loc.postal_code || '',
+            'addressCountry': loc.country_code
+          },
+          'email': loc.email || '',
+          'telephone': loc.phone || '',
+          'priceRange': '€€'
+        }
+      });
+
       // Microdata attributes
       var hl = document.querySelector('[itemprop="headline"]');
       if (hl) hl.innerText = 'Max Performance Web Development in ' + loc.city;
