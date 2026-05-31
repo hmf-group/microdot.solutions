@@ -974,3 +974,39 @@ a.btn-whatsapp-anchor, a.btn-contact-anchor {
         width: 100%;
     }
 }
+
+.roadmap-step {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.announcement-badge {
+    font-size: x-large;
+}
+
+.step-time {
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+span.time-frame {
+    font-weight: 200;
+    font-size: large;
+}
+
+.announcement-body {
+    margin-bottom: 30px;
+}
+
+p.microdata-pitch {
+    margin-bottom: 20px;
+    margin-top: 40px;
+    font-size: x-large;
+    line-height: 1;
+    letter-spacing: -.02em;
+    min-height: 1em;
+}
