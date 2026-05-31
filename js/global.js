@@ -81,7 +81,6 @@
     if (userAgent.includes('Safari')) return 'Apple Safari';
     return 'unknown';
   }
-  console.log('You are using: ' + getBrowserName(navigator.userAgent));
 
   // ───────── CSS Class Randomization ─────────
 

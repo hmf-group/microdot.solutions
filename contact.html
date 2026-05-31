@@ -47,7 +47,6 @@
     <meta name="theme-color" content="#3ddf1b" media="(prefers-color-scheme: dark)">
 
     <script defer src="js/global.min.js"></script>
-    <link rel="preload" as="style" href="css/base.min.css" />
     <link rel="stylesheet" href="css/base.min.css">
     <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js'); }</script>
 
@@ -211,7 +210,7 @@
                 <section class="form-section">
                     <h2>Start Your Project</h2>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                    <form class="contact-form" action="/contact.php" method="POST">
+                    <form class="contact-form" action="/contact/" method="POST">
                         <div style="position:absolute;left:-9999px" aria-hidden="true">
                             <label for="website">Website</label>
                             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
@@ -485,7 +484,7 @@
         msg.textContent = '';
         btn.disabled = true;
         btn.textContent = 'Sending...';
-        fetch('/contact.php', { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        fetch('/contact/', { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
             .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
             .then(function(res) {
                 if (res.data.ok) {

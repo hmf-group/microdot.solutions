@@ -40,6 +40,18 @@ RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
 # URL Routing
 # =============================
 
+# Contact form — allow POST to contact.php (bypass page routing)
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^contact\.php$ - [L]
+
+# Clean /contact/ POST → contact.php
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^contact/$ contact.php [L]
+
+# Redirect GET /contact.php → /contact/ (old cached links)
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^contact\.php$ /contact/ [R=301,L]
+
 # Geo-location URLs (2-letter country / province / city) → index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
