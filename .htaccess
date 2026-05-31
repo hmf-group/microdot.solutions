@@ -18,7 +18,7 @@ ErrorDocument 404 /404/
 # Security Headers
 # =============================
 <IfModule mod_headers.c>
-    Header set Content-Security-Policy "default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' http://localhost:* http://127.0.0.1:* 'sha256-iN7wpJdxHlpujRppkOA8N0+Mzp0ZqZr3lCtxM00Y63c='; style-src 'self' http://localhost:* http://127.0.0.1:*; img-src 'self' http://localhost:* http://127.0.0.1:* data:; font-src 'self' http://localhost:* http://127.0.0.1:*; connect-src 'self' http://localhost:* http://127.0.0.1:*; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' http://localhost:* http://127.0.0.1:*; frame-ancestors 'none';"
+    Header set Content-Security-Policy "default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' http://localhost:* http://127.0.0.1:* 'sha256-iN7wpJdxHlpujRppkOA8N0+Mzp0ZqZr3lCtxM00Y63c='; style-src 'self' http://localhost:* http://127.0.0.1:*; img-src 'self' http://localhost:* http://127.0.0.1:* data:; font-src 'self' http://localhost:* http://127.0.0.1:*; connect-src 'self' http://localhost:* http://127.0.0.1:* https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' http://localhost:* http://127.0.0.1:* https://formsubmit.co; frame-ancestors 'none';"
 </IfModule>
 
 RewriteEngine On
@@ -39,18 +39,6 @@ RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
 # =============================
 # URL Routing
 # =============================
-
-# Contact form — allow POST to contact.php (bypass page routing)
-RewriteCond %{REQUEST_METHOD} POST
-RewriteRule ^contact\.php$ - [L]
-
-# Clean /contact/ POST → contact.php
-RewriteCond %{REQUEST_METHOD} POST
-RewriteRule ^contact/$ contact.php [L]
-
-# Redirect GET /contact.php → /contact/ (old cached links)
-RewriteCond %{REQUEST_METHOD} GET
-RewriteRule ^contact\.php$ /contact/ [R=301,L]
 
 # Geo-location URLs (2-letter country / province / city) → index.html
 RewriteCond %{REQUEST_FILENAME} !-f

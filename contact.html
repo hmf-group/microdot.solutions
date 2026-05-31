@@ -210,7 +210,9 @@
                 <section class="form-section">
                     <h2>Start Your Project</h2>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                    <form class="contact-form" action="/contact/" method="POST">
+                    <form class="contact-form" action="https://formsubmit.co/sherwin1983@gmail.com" method="POST">
+                        <input type="hidden" name="_next" value="https://microdot.solutions/contact/?sent=1">
+                        <input type="hidden" name="_captcha" value="true">
                         <div style="position:absolute;left:-9999px" aria-hidden="true">
                             <label for="website">Website</label>
                             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
@@ -480,11 +482,13 @@
         var btn = document.getElementById('form-submit-btn');
         var msg = document.getElementById('form-message');
         var data = new FormData(form);
+        var jsonData = {};
+        data.forEach(function(v, k) { jsonData[k] = v; });
         msg.className = 'form-message';
         msg.textContent = '';
         btn.disabled = true;
         btn.textContent = 'Sending...';
-        fetch('/contact/', { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        fetch('https://formsubmit.co/ajax/sherwin1983@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(jsonData) })
             .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
             .then(function(res) {
                 if (res.data.ok) {
