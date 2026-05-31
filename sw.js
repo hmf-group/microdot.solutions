@@ -104,6 +104,7 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
   var url = new URL(event.request.url);
   if (url.searchParams.has('__sw_bypass')) return;
+  if (url.origin !== self.location.origin) return;
 
   // Page routes: /services/ → services.html, /contact/ → contact.html
   var pageMatch = url.pathname.match(/^\/([a-z0-9_-]+)\/$/);
