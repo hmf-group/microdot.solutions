@@ -210,13 +210,7 @@
                 <section class="form-section">
                     <h2>Start Your Project</h2>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                    <form class="contact-form" action="https://formsubmit.co/sherwin1983@gmail.com" method="POST">
-                        <input type="hidden" name="_next" value="https://microdot.solutions/contact/?sent=1">
-                        <input type="hidden" name="_captcha" value="true">
-                        <div style="position:absolute;left:-9999px" aria-hidden="true">
-                            <label for="website">Website</label>
-                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
-                        </div>
+                    <form class="contact-form" id="contact-form" action="https://client.hmf-group.com/administrator/api/content/item/microdotsolutions" method="POST">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullname">Full Name <span class="required">*</span></label>
@@ -476,15 +470,54 @@
     <!-- TODO: request notification permission -->
 
     <script>
-    // Show success message after FormSubmit redirect
-    if (window.location.search.indexOf('sent=1') !== -1) {
-      document.querySelector('.contact-form').style.display = 'none';
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var btn = document.getElementById('form-submit-btn');
       var msg = document.getElementById('form-message');
-      if (msg) {
-        msg.className = 'form-message success';
-        msg.textContent = 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.';
-      }
-    }
+      msg.className = 'form-message';
+      msg.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      var services = [];
+      form.querySelectorAll('input[name="services[]"]:checked').forEach(function(cb) {
+        services.push({ service: cb.value });
+      });
+
+      var payload = {
+        data: {
+          fullname: form.querySelector('#fullname').value,
+          email: form.querySelector('#email').value,
+          company: form.querySelector('#company').value,
+          country: form.querySelector('#country').value,
+          services: services,
+          message: form.querySelector('#message').value
+        }
+      };
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json().catch(function() { return {}; }).then(function(d) { return { status: r.status, data: d }; }); })
+      .then(function(res) {
+        if (res.status >= 200 && res.status < 300) {
+          msg.className = 'form-message success';
+          msg.textContent = 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.';
+          form.reset();
+        } else {
+          msg.className = 'form-message error';
+          msg.textContent = res.data.error || res.data.message || 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(function() {
+        msg.className = 'form-message error';
+        msg.textContent = 'Network error. Please try again or email sherwin1983@gmail.com directly.';
+      })
+      .then(function() { btn.disabled = false; btn.textContent = 'Send Message'; });
+    });
     </script>
 </body>
 

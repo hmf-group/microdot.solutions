@@ -18,7 +18,7 @@ ErrorDocument 404 /404/
 # Security Headers
 # =============================
 <IfModule mod_headers.c>
-    Header set Content-Security-Policy "default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' http://localhost:* http://127.0.0.1:* 'sha256-iN7wpJdxHlpujRppkOA8N0+Mzp0ZqZr3lCtxM00Y63c='; style-src 'self' http://localhost:* http://127.0.0.1:*; img-src 'self' http://localhost:* http://127.0.0.1:* data:; font-src 'self' http://localhost:* http://127.0.0.1:*; connect-src 'self' http://localhost:* http://127.0.0.1:* https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' http://localhost:* http://127.0.0.1:* https://formsubmit.co; frame-ancestors 'none';"
+    Header set Content-Security-Policy "default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' http://localhost:* http://127.0.0.1:* 'sha256-iN7wpJdxHlpujRppkOA8N0+Mzp0ZqZr3lCtxM00Y63c='; style-src 'self' http://localhost:* http://127.0.0.1:*; img-src 'self' http://localhost:* http://127.0.0.1:* data:; font-src 'self' http://localhost:* http://127.0.0.1:*; connect-src 'self' http://localhost:* http://127.0.0.1:* https://client.hmf-group.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' http://localhost:* http://127.0.0.1:* https://client.hmf-group.com; frame-ancestors 'none';"
 </IfModule>
 
 RewriteEngine On
