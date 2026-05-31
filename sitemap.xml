@@ -26,6 +26,16 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://microdot.solutions/privacy/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://microdot.solutions/terms/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://microdot.solutions/ae/dubai/dubai/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

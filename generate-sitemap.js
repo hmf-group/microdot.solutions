@@ -5,7 +5,7 @@ const DOMAIN = 'https://microdot.solutions';
 const GEO_DIR = path.join(__dirname, 'geo-data');
 const OUTPUT = path.join(__dirname, 'sitemap.xml');
 
-const PAGE_ROUTES = ['services', 'contact', 'case-studies', 'why-us'];
+const PAGE_ROUTES = ['services', 'contact', 'case-studies', 'why-us', 'privacy', 'terms'];
 
 function slugify(text) {
   return text.toString().toLowerCase().trim()

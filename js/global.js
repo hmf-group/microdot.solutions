@@ -7,6 +7,39 @@
   gtag('js', new Date());
   gtag('config', 'G-ZY09WDB16W');
 
+  // Cookie consent banner
+  (function() {
+    var CONSENT_KEY = 'microdot_consent';
+    var consent = localStorage.getItem(CONSENT_KEY);
+    if (consent === 'accepted') return;
+    if (consent === 'declined') { gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' }); return; }
+    function showBanner() {
+      var banner = document.getElementById('consent-banner');
+      if (!banner) return;
+      setTimeout(function() { banner.classList.add('show'); }, 500);
+      var accept = document.getElementById('consent-accept');
+      var decline = document.getElementById('consent-decline');
+      var close = document.getElementById('consent-close');
+      function handleAccept() {
+        localStorage.setItem(CONSENT_KEY, 'accepted');
+        banner.classList.remove('show');
+      }
+      function handleDecline() {
+        localStorage.setItem(CONSENT_KEY, 'declined');
+        gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
+        banner.classList.remove('show');
+      }
+      if (accept) accept.addEventListener('click', handleAccept);
+      if (decline) decline.addEventListener('click', handleDecline);
+      if (close) close.addEventListener('click', handleDecline);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showBanner);
+    } else {
+      showBanner();
+    }
+  })();
+
   // Restore visibility on bfcache navigation (back/forward)
   window.addEventListener('pageshow', function (e) {
     if (e.persisted) { document.body.style.opacity = '1'; document.body.style.overflow = ''; }
