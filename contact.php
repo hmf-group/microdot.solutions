@@ -8,8 +8,8 @@ define('RATE_LIMIT_SECONDS', 300);
 define('MAX_REQUESTS_PER_IP', 3);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit('Method not allowed');
+    header('Location: /contact/', true, 303);
+    exit;
 }
 
 $honeypot = trim($_POST['website'] ?? '');
