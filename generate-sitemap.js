@@ -5,7 +5,7 @@ const DOMAIN = 'https://microdot.solutions';
 const GEO_DIR = path.join(__dirname, 'geo-data');
 const OUTPUT = path.join(__dirname, 'sitemap.xml');
 
-const PAGE_ROUTES = ['services', 'contact', 'case-studies', 'why-us', 'privacy', 'terms', 'next-gen-web-development', 'semantic-web-development-company', 'web-development-agency', 'fast-microdata-web-development', 'high-speed-html-web-development', 'ai-ready-web-development'];
+const PAGE_ROUTES = ['services', 'contact', 'case-studies', 'why-us', 'privacy', 'terms', 'next-gen-web-development', 'semantic-web-development-company', 'web-development-agency', 'fast-microdata-web-development', 'high-speed-html-web-development', 'ai-ready-web-development', 'worldwide-microdata-development', 'usa-microdata-website-developer', 'uk-microdata-web-development', 'europe-structured-data-agency', 'asia-pacific-microdata-experts', 'middle-east-schema-markup', 'latin-america-microdata-web-development'];
 
 function slugify(text) {
   return text.toString().toLowerCase().trim()
