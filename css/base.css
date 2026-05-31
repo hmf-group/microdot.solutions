@@ -40,7 +40,7 @@ html { scroll-behavior: smooth; }
 .hidden { display: none; }
 
 /* Updated badge */
-.updated-badge { color: gray; font-size: small; }
+.updated-badge { font-size: small; }
 
 .uniq {
   display: flex;

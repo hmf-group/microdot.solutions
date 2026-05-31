@@ -1,18 +1,37 @@
 (function () {
   'use strict';
 
-  // Google Analytics (gtag)
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZY09WDB16W');
+  // Deferred analytics loader — loads gtag + GTM only after consent
+  function loadAnalytics() {
+    if (window._analyticsLoaded) return;
+    window._analyticsLoaded = true;
+    // gtag.js
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZY09WDB16W';
+    document.head.appendChild(g);
+    // GTM
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MMCHP2');
+  }
 
   // Cookie consent banner
   (function() {
     var CONSENT_KEY = 'microdot_consent';
     var consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === 'accepted') return;
-    if (consent === 'declined') { gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' }); return; }
+    if (consent === 'accepted') {
+      // Load analytics during idle time (previous consent)
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAnalytics);
+      } else {
+        setTimeout(loadAnalytics, 2000);
+      }
+      return;
+    }
+    if (consent === 'declined') { return; }
     function showBanner() {
       var banner = document.getElementById('consent-banner');
       if (!banner) return;
@@ -22,11 +41,11 @@
       var close = document.getElementById('consent-close');
       function handleAccept() {
         localStorage.setItem(CONSENT_KEY, 'accepted');
+        loadAnalytics();
         banner.classList.remove('show');
       }
       function handleDecline() {
         localStorage.setItem(CONSENT_KEY, 'declined');
-        gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
         banner.classList.remove('show');
       }
       if (accept) accept.addEventListener('click', handleAccept);
