@@ -218,7 +218,7 @@
                 <section class="form-section">
                     <h2>Start Your Project</h2>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                    <form class="contact-form" action="/contact/" method="POST">
+                    <form class="contact-form" action="/contact.php" method="POST">
                         <div style="position:absolute;left:-9999px" aria-hidden="true">
                             <label for="website">Website</label>
                             <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
@@ -493,7 +493,7 @@
         msg.textContent = '';
         btn.disabled = true;
         btn.textContent = 'Sending...';
-        fetch('/contact/', { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        fetch('/contact.php', { method: 'POST', body: data, headers: { 'X-Requested-With': 'XMLHttpRequest' } })
             .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
             .then(function(res) {
                 if (res.data.ok) {
