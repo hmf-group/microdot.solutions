@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://microdot.solutions/sitemap.xml
+Link: https://microdot.solutions/llms.txt; rel="llms-txt"
