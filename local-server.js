@@ -38,8 +38,15 @@ const server = http.createServer((req, res) => {
     });
   }
 
-  // Geo-location: /xx/xxx → index.html (only extensionless paths)
+  // Geo-location: try pre-rendered file first, fall back to index.html
   if (/^\/[a-z]{2}\//.test(url) && path.extname(url) === '') {
+    const geoMatch = url.match(/^\/([a-z]{2})\/([^/]+)\/([^/]+)\/?$/);
+    if (geoMatch) {
+      const geoPath = __dirname + '/_geo/' + geoMatch[1] + '/' + geoMatch[2] + '/' + geoMatch[3] + '.html';
+      return fs.access(geoPath, fs.constants.F_OK, (err) => {
+        serve(res, err ? __dirname + '/index.html' : geoPath);
+      });
+    }
     return serve(res, __dirname + '/index.html');
   }
 

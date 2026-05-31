@@ -42,7 +42,11 @@ RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
 # URL Routing
 # =============================
 
-# Geo-location URLs (2-letter country / province / city) → index.html
+# Pre-rendered geo pages (3 segments): /de/berlin/berlin/ → _geo/de/berlin/berlin.html
+RewriteCond %{DOCUMENT_ROOT}/_geo/$1/$2/$3.html -f
+RewriteRule ^([a-z]{2})/([^/]+)/([^/]+)/$ /_geo/$1/$2/$3.html [L]
+
+# Geo-location URLs (2-letter country / province) → index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^[a-z]{2}/[^/]+/?$ /index.html [L]
