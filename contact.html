@@ -210,7 +210,7 @@
                 <section class="form-section">
                     <h2>Start Your Project</h2>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                    <form class="contact-form" id="contact-form" action="https://client.hmf-group.com/administrator/api/content/item/microdotsolutions" method="POST">
+                    <form class="contact-form" id="contact-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullname">Full Name <span class="required">*</span></label>
@@ -496,7 +496,7 @@
         }
       };
 
-      fetch(form.action, {
+      fetch('https://client.hmf-group.com/administrator/api/content/item/microdotsolutions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
