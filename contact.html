@@ -498,20 +498,23 @@
 
       fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
-      .then(function() {
-        // Request sent — API receives it even if CORS blocks reading response
-        msg.className = 'form-message success';
-        msg.textContent = 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.';
-        form.reset();
+      .then(function(r) { return r.json().catch(function() { return {}; }).then(function(d) { return { status: r.status, data: d }; }); })
+      .then(function(res) {
+        if (res.status >= 200 && res.status < 300) {
+          msg.className = 'form-message success';
+          msg.textContent = 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.';
+          form.reset();
+        } else {
+          msg.className = 'form-message error';
+          msg.textContent = res.data.error || res.data.message || 'Something went wrong. Please try again.';
+        }
       })
       .catch(function() {
-        // Simple request still reaches server; show success
-        msg.className = 'form-message success';
-        msg.textContent = 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.';
-        form.reset();
+        msg.className = 'form-message error';
+        msg.textContent = 'Network error. Please try again or email sherwin1983@gmail.com directly.';
       })
       .then(function() { btn.disabled = false; btn.textContent = 'Send Message'; });
     });
