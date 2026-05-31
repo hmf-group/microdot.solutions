@@ -2,6 +2,8 @@ ErrorDocument 404 /
 
 Header add Link "<https://microdot.solutions/llms.txt>; rel=\"llms-txt\""
 
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
 # =============================
 # Compression — gzip
 # =============================
