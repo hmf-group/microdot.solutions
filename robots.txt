@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /geo-data/
+Disallow: /node_modules/
+Disallow: /_geo/
+Disallow: /fav/
+Disallow: /.git/
+Disallow: /generate-geo-pages.js
+Disallow: /generate-sitemap.js
+Disallow: /local-server.js
 
 Sitemap: https://microdot.solutions/sitemap.xml
 Sitemap: https://microdot.solutions/llms.txt

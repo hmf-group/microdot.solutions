@@ -40,14 +40,14 @@ function slugify(text) {
 }
 
 function detectCountry(acceptLanguage) {
-  if (!acceptLanguage) return 'de';
+  if (!acceptLanguage) return 'lk';
   const langs = acceptLanguage.split(',').map(s => s.trim().split(';')[0]);
   for (const lang of langs) {
     const parts = lang.split('-');
     const cc = (parts[1] || parts[0] || '').toLowerCase();
     if (GEO_DATA[cc]) return cc;
   }
-  return 'de';
+  return 'lk';
 }
 
 function renderLocation(html, loc, cc, page) {
@@ -166,8 +166,8 @@ function renderLocation(html, loc, cc, page) {
 
   // Update url meta
   result = result.replace(
-    /<meta name='url'\s+content='[^']*'/,
-    "<meta name='url' content='" + meta.canonical + "'"
+    /<meta name="url"\s+content="[^"]*"/,
+    '<meta name="url" content="' + meta.canonical + '"'
   );
 
   // Update twitter:title
@@ -278,7 +278,7 @@ function serveAndRender(res, filePath, req, page) {
     // If HTML has placeholders, do server-side geo replacement
     if (html.indexOf('{{') !== -1) {
       const cc = detectCountry(req.headers['accept-language']);
-      const geoData = GEO_DATA[cc] || GEO_DATA['de'] || [];
+      const geoData = GEO_DATA[cc] || GEO_DATA['lk'] || [];
       const loc = geoData[0];
       if (loc) {
         html = renderLocation(html, loc, cc, page || path.basename(filePath));
