@@ -220,11 +220,11 @@
         'description': loc.city + ', ' + loc.state_province,
         'keywords': loc.city + ', ' + loc.state_province + ', ' + loc.country,
         'subject': 'Web Development Services in ' + loc.city,
-        'url': origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city),
+        'url': origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city) + '/',
         'twitter:title': 'Light-Speed HTML/CSS Websites in ' + loc.city + ' | Microdot',
         'twitter:description': 'Zero framework bloat. 100% PageSpeed scores in ' + loc.city + ', ' + loc.state_province + '.',
         'og:title': 'Light-Speed HTML/CSS Websites in ' + loc.city + ' | Microdot',
-        'og:url': origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city),
+        'og:url': origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city) + '/',
         'og:description': 'Built with zero framework bloat. Pure HTML, lightweight CSS, and native microdata schemas engineered for 100% PageSpeed scores in ' + loc.city + ', ' + loc.state_province + '.'
       };
       for (var key in map) {
@@ -241,7 +241,7 @@
       var canon = document.querySelector('link[rel="canonical"]');
       if (canon) {
         canon.setAttribute('href',
-          window.location.origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city)
+          window.location.origin + '/' + loc.country_code.toLowerCase() + '/' + slugify(loc.state_province) + '/' + slugify(loc.city) + '/'
         );
       }
 
