@@ -50,6 +50,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^[a-z]{2}/[^/]+/(.+)$ /$1 [L]
 
+# Contact form handler (POST) → contact.php
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^contact/$ contact.php [L]
+
 # Page routes (1 segment with trailing slash) → page.html
 # e.g. /services/ → services.html, /contact/ → contact.html
 RewriteCond %{REQUEST_FILENAME} !-f
