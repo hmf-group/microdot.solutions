@@ -1,6 +1,12 @@
 (function () {
   'use strict';
 
+  // Google Analytics (gtag)
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZY09WDB16W');
+
   // Restore visibility on bfcache navigation (back/forward)
   window.addEventListener('pageshow', function (e) {
     if (e.persisted) { document.body.style.opacity = '1'; document.body.style.overflow = ''; }
