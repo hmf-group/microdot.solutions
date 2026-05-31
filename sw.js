@@ -89,7 +89,16 @@ self.addEventListener('install', function () {
 });
 
 self.addEventListener('activate', function (event) {
-  event.waitUntil(clients.claim());
+  event.waitUntil(
+    clients.claim().then(function () {
+      // Delete all old caches on activation
+      if ('caches' in self) {
+        caches.keys().then(function (names) {
+          return Promise.all(names.map(function (n) { return caches.delete(n); }));
+        });
+      }
+    })
+  );
 });
 
 self.addEventListener('fetch', function (event) {
