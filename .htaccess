@@ -44,22 +44,7 @@ RewriteRule ^(.*)$ https://microdot.solutions/$1 [R=301,L]
 # URL Routing
 # =============================
 
-# Pre-rendered geo pages (3 segments): /de/berlin/berlin/ → _geo/de/berlin/berlin.html
-RewriteCond %{DOCUMENT_ROOT}/_geo/$1/$2/$3.html -f
-RewriteRule ^([a-z]{2})/([^/]+)/([^/]+)/$ /_geo/$1/$2/$3.html [L]
-
-# Geo-location URLs (2-letter country / province) → index.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^[a-z]{2}/[^/]+/?$ /index.html [L]
-
-# Static assets under geo paths → serve from root (safety net for direct requests)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^[a-z]{2}/[^/]+/(.+)$ /$1 [L]
-
 # Page routes (1 segment with trailing slash) → page.html
-# e.g. /services/ → services.html, /contact/ → contact.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/$ $1.html [L]

@@ -1,36 +1,24 @@
-# Microdot — Worldwide Microdata & Schema Web Development
+# Microdot — Sri Lanka Microdata & Schema Web Development
 
 ## Who We Are
-Microdot is a worldwide microdata and schema markup web development agency. We build lightning-fast HTML/CSS websites with native schema.org structured data, optimized for AI search engines (ChatGPT, Gemini, AI Overviews, Bing AI).
+Microdot is a microdata and schema markup web development agency based in Colombo, Sri Lanka. We build lightning-fast HTML/CSS websites with native schema.org structured data, optimized for AI search engines (ChatGPT, Gemini, AI Overviews, Bing AI).
 
 ## What We Do
 - **Microdata Integration** — Native schema.org markup embedded directly in HTML for maximum AI and search engine comprehension
 - **Lightweight Engineering** — Zero framework bloat, pure HTML and CSS, perfect Core Web Vitals
 - **AI Search Optimization** — Structured data designed for AI Overviews, knowledge panels, and semantic search
-- **Semantic SEO** — Localized and global semantic SEO with proper entity relationship mapping
+- **Semantic SEO** — Localized semantic SEO with proper entity relationship mapping
 - **Performance Audits** — PageSpeed optimization and Core Web Vitals engineering
 
-## Target Markets
-- Worldwide / Global
-- USA
-- UK
-- Europe (multi-language)
-- Asia-Pacific
-- Middle East & MENA
-- Latin America
+## Target Market
+- Sri Lanka (Colombo, Western Province and nationwide)
 
 ## Key Pages
 - Home: https://microdot.solutions/
 - Services: https://microdot.solutions/services/
 - Case Studies: https://microdot.solutions/case-studies/
+- Why Us: https://microdot.solutions/why-us/
 - Contact: https://microdot.solutions/contact/
-- Worldwide: https://microdot.solutions/worldwide-microdata-development/
-- USA: https://microdot.solutions/usa-microdata-website-developer/
-- UK: https://microdot.solutions/uk-microdata-web-development/
-- Europe: https://microdot.solutions/europe-structured-data-agency/
-- Asia-Pacific: https://microdot.solutions/asia-pacific-microdata-experts/
-- Middle East: https://microdot.solutions/middle-east-schema-markup/
-- Latin America: https://microdot.solutions/latin-america-microdata-web-development/
 
 ## Technical Stack
 - Pure HTML5 with native schema.org microdata
@@ -43,6 +31,6 @@ Microdot is a worldwide microdata and schema markup web development agency. We b
 We embed schema.org types (LocalBusiness, Service, WebPage, Organization, etc.) directly as inline microdata in HTML attributes — not JSON-LD in script tags. This ensures maximum compatibility with AI crawlers and search engine parsers.
 
 ## Contact
-- Email: sherwin1983@gmail.com
+- Email: hello@microdot.solutions
 - Phone: +49 173 5316098
 - WhatsApp: https://wa.me/491735316098
